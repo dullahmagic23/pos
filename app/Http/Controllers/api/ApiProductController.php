@@ -14,7 +14,7 @@ class ApiProductController extends Controller
     {
         return Product::all();
     }
-    
+
     public function store(Request $request)
     {
         $request->validate([
@@ -53,12 +53,13 @@ class ApiProductController extends Controller
 
         $product->update($request->only(['name', 'description', 'category_id', 'code']));
 
-        foreach ($product->units as $unit) {
-            $product->units()->detach($unit->id);
-        }
-        foreach ($request->units as $unit) {
-            $product->units()->attach($unit);
-        }
+//        foreach ($product->units as $unit) {
+//            $product->units()->detach($unit->id);
+//        }
+//        foreach ($request->units as $unit) {
+//            $product->units()->attach($unit);
+//        }
+        $product->units()->sync($request->units);
 
         return response()->json($product->load(['category', 'units']));
     }
