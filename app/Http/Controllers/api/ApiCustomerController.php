@@ -22,7 +22,7 @@ class ApiCustomerController extends Controller
 
     public function index()
     {
-        return Customer::all();
+        return \response()->json(Customer::all());
     }
 
     public function update(Request $request, $id)
