@@ -44,10 +44,10 @@
       </div>
     </div>
   </template>
-  
+
   <script>
   import axios from 'axios';
-  
+
   export default {
     data() {
       return {
@@ -110,6 +110,13 @@
             }).then((response) => {
               this.loader = false;
               alert(response.data.message);
+              //reset the form
+                this.stockAmount = 0;
+                this.product = '';
+                this.unitFrom = '';
+                this.unitTo = '';
+                this.conversionRate = '';
+                this.convertedAmount = null;
             }, function (error) {
                 alert('Error converting stock: '+error.response.data.message);
             });
@@ -124,8 +131,7 @@
     },
   };
   </script>
-  
+
   <style>
   /* Add any custom styles here */
   </style>
-  

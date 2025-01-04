@@ -191,6 +191,75 @@
                                             INVENTORY</a>
                                     </nav>
                                 </div>
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages1" aria-expanded="false" aria-controls="collapsePages">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-store-slash"></i></div>
+                                    PRODUCTS
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="collapsePages1" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                            <div class="sb-nav-link-icon">
+                                                <i class="fa-solid fa-list"></i></div>
+                                            Categories
+                                            <div class="sb-sidenav-collapse-arrow">
+                                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                            </div>
+                                        </a>
+                                        <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                            <nav class="sb-sidenav-menu-nested nav">
+                                                <a class="nav-link" href="{{route('categories.index')}}">
+                                                    <div class="sb-nav-link-icon">
+                                                        <i class="fas fa-user-plus mr-2"></i></div>
+                                                    Manage Categories
+                                                </a>
+                                            </nav>
+                                        </div>
+
+                                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth1" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                            <div class="sb-nav-link-icon">
+                                                <i class="far fa-clone"></i>
+                                            </div>
+                                            Product Units
+                                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                        </a>
+                                        <div class="collapse" id="pagesCollapseAuth1" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                            <nav class="sb-sidenav-menu-nested nav">
+                                                <a class="nav-link" href="{{route('units.index')}}">
+                                                    <div class="sb-nav-link-icon">
+                                                        <i class="fas fa-user-plus mr-2"></i>
+                                                    </div>
+                                                    Manage Units
+                                                </a>
+                                            </nav>
+                                        </div>
+                                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
+                                            <div class="sb-nav-link-icon">
+                                                <i class="fas fa-user"></i></div>
+                                            Product
+                                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                        </a>
+                                        <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                            <nav class="sb-sidenav-menu-nested nav">
+                                                <a class="nav-link" href="{{route('products.create')}}">
+                                                    <div class="sb-nav-link-icon">
+                                                        <i class="fas fa-user-plus mr-2"></i></div>
+                                                    New
+                                                </a>
+                                                <a class="nav-link" href="{{route('products.index')}}">
+                                                    <div class="sb-nav-link-icon">
+                                                        <i class="fas fa-user-cog mr-2"></i></div>
+                                                    Manage
+                                                </a>
+                                                <a class="nav-link" href="{{route('products.changePrice')}}">
+                                                    <div class="sb-nav-link-icon">
+                                                        <i class="fa fa-refresh"></i></div>
+                                                    Chage Prices
+                                                </a>
+                                            </nav>
+                                        </div>
+                                    </nav>
+                                </div>
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts3" aria-expanded="false" aria-controls="collapseLayouts">
                                     <div class="sb-nav-link-icon"><i class="fas fa-file-pdf"></i></div>
                                     INVOICES
@@ -305,70 +374,6 @@
                                                     <div class="sb-nav-link-icon">
                                                         <i class="fas fa-user-cog mr-2"></i></div>
                                                     Manage Suppliers
-                                                </a>
-                                            </nav>
-                                        </div>
-                                    </nav>
-                                </div>
-                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages1" aria-expanded="false" aria-controls="collapsePages">
-                                    <div class="sb-nav-link-icon"><i class="fas fa-store-slash"></i></div>
-                                    PRODUCTS
-                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                </a>
-                                <div class="collapse" id="collapsePages1" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                                    <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                            <div class="sb-nav-link-icon">
-                                                <i class="fa-solid fa-list"></i></div>
-                                            Categories
-                                            <div class="sb-sidenav-collapse-arrow">
-                                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                            </div>
-                                        </a>
-                                        <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                            <nav class="sb-sidenav-menu-nested nav">
-                                                <a class="nav-link" href="{{route('categories.index')}}">
-                                                    <div class="sb-nav-link-icon">
-                                                        <i class="fas fa-user-plus mr-2"></i></div>
-                                                    Manage Categories
-                                                </a>
-                                            </nav>
-                                        </div>
-
-                                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth1" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                            <div class="sb-nav-link-icon">
-                                                <i class="far fa-clone"></i>
-                                            </div>
-                                            Product Units
-                                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                        </a>
-                                        <div class="collapse" id="pagesCollapseAuth1" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                            <nav class="sb-sidenav-menu-nested nav">
-                                                <a class="nav-link" href="{{route('units.index')}}">
-                                                    <div class="sb-nav-link-icon">
-                                                        <i class="fas fa-user-plus mr-2"></i>
-                                                    </div>
-                                                    Manage Units
-                                                </a>
-                                            </nav>
-                                        </div>
-                                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                                            <div class="sb-nav-link-icon">
-                                                <i class="fas fa-user"></i></div>
-                                            Product
-                                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                        </a>
-                                        <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                            <nav class="sb-sidenav-menu-nested nav">
-                                                <a class="nav-link" href="{{route('products.create')}}">
-                                                    <div class="sb-nav-link-icon">
-                                                        <i class="fas fa-user-plus mr-2"></i></div>
-                                                    New
-                                                </a>
-                                                <a class="nav-link" href="{{route('products.index')}}">
-                                                    <div class="sb-nav-link-icon">
-                                                        <i class="fas fa-user-cog mr-2"></i></div>
-                                                    Manage
                                                 </a>
                                             </nav>
                                         </div>

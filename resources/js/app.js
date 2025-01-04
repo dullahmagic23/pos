@@ -53,6 +53,7 @@ import ExpenseShow from "./components/expenses/ExpenseShow.vue";
 import ConvertCompnent from './components/stocks/ConvertCompnent.vue';
 import DiscountIndex from './components/discounts/DiscountIndex.vue';
 import CreateDiscount from './components/discounts/CreateDiscount.vue';
+import ChangePrice from "./components/products/ChangePrice.vue";
 app.component('example-component', ExampleComponent);
 app.component('user-index',UserIndex)
 app.component('create-user',UserCreate)
@@ -90,6 +91,7 @@ app.component('expense-show', ExpenseShow)
 app.component('convert-component',ConvertCompnent)
 app.component('discount-index',DiscountIndex)
 app.component('discount-create',CreateDiscount)
+app.component('change-price', ChangePrice)
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

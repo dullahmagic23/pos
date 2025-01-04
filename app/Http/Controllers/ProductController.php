@@ -36,4 +36,9 @@ class ProductController extends Controller
         return response()->json(['data' => $product], 200);
 
     }
+
+    public function changePrice()
+    {
+        return view('products.change-price');
+    }
 }

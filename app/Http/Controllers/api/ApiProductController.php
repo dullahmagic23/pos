@@ -79,4 +79,32 @@ class ApiProductController extends Controller
 
     }
 
+    public function changePrice(Request $request, $id)
+    {
+        $request->validate([
+            'price' => 'required|numeric',
+            'productId' => 'required',
+            'unitId' => 'required',
+            'expiryDate' => 'required|date'
+        ]);
+        $product = Product::findOrFail($id);
+       if(auth()->user()->roles->contains('name', 'administrator')){
+           $stock = \DB::table('product_unit')->where('product_id', $request->productId)->where('unit_id', $request->unitId)->first();
+           if ($stock) {
+               $product->units()->updateExistingPivot($request->unitId, ['price' => $request->price, 'expiry_date' => $request->expiryDate]);
+               return response()->json(['message' => 'Price updated successfully'], 200);
+           } else {
+               return response()->json(['message' => 'Product not found'], 404);
+           }
+        }else{
+            return response()->json(['message' => 'Unauthorized'], Response::HTTP_UNAUTHORIZED);
+        }
+    }
+
+    public function getExpiry($productId, $unitId)
+    {
+        $expiry = \DB::table('product_unit')->where('product_id', $productId)->where('unit_id', $unitId)->first()->expiry_date;
+        return \response()->json(['expiry' => $expiry]);
+    }
+
 }

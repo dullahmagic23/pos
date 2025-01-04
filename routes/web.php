@@ -47,7 +47,9 @@ Route::group(['prefix' => 'api','middleware' => ['auth']], function () {
     Route::put('products/{id}',"App\Http\Controllers\api\ApiProductController@show")->name('api.products.show');
     Route::get('products/{id}/units',"App\Http\Controllers\api\ApiProductController@getUnits")->name('api.products.getUnits');
     Route::get('products/{id}',"App\Http\Controllers\api\ApiProductController@find")->name('api.products.find');
+    Route::post('products/change-price/{id}',"App\Http\Controllers\api\ApiProductController@changePrice")->name('api.products.changePrice');
     Route::post('/products/{id}/addQuantity',"App\Http\Controllers\api\ApiProductController@addQuantity")->name('api.products.addQuantity');
+    Route::get('products/{id}/units/{unit_id}/expiry-date',"App\Http\Controllers\api\ApiProductController@getExpiry")->name('api.products.getExpiry');
     Route::get('stocks',"App\Http\Controllers\api\ApiStockController@index")->name('api.stocks.index');
     Route::post('stocks',"App\Http\Controllers\api\ApiStockController@store")->name('api.stocks.store');
     Route::put('stocks/{id}',"App\Http\Controllers\api\ApiStockController@update")->name('api.stocks.update');
@@ -83,7 +85,7 @@ Route::group(['prefix' => 'api','middleware' => ['auth']], function () {
     Route::delete('/discounts/product/{productId}/{discountId}',"App\Http\Controllers\api\ApiDiscountController@removeToProduct")->name('api.discounts.removeToProduct');
     Route::post('/discounts/product/{id}','App\Http\Controllers\api\ApiDiscountController@applyToProduct')->name('api.discounts.applyToProduct');
     Route::delete('/discounts/{id}','App\Http\Controllers\api\ApiDiscountController@destroy')->name('api.discounts.destroy');
-    Route::get('discount_types',"App\Http\Controllers\api\ApiDiscountTypeController@index")->name('api.discount_types.index');  
+    Route::get('discount_types',"App\Http\Controllers\api\ApiDiscountTypeController@index")->name('api.discount_types.index');
 });
 
 Route::group(
@@ -118,6 +120,7 @@ Route::group(['prefix'=>'products','middleware'=>['auth','admin']],function(){
     Route::post('/','App\Http\Controllers\ProductController@store')->name('products.store');
     Route::get('/create','App\Http\Controllers\ProductController@create')->name('products.create');
     Route::put('/{id}','App\Http\Controllers\ProductController@update')->name('products.update');
+    Route::get('/change-price','App\Http\Controllers\ProductController@changePrice')->name('products.changePrice');
 });
 
 Route::group(['prefix' => 'stocks', 'middleware' => ['auth', 'admin']], function () {
