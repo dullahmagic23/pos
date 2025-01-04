@@ -166,6 +166,13 @@ export default {
       }
     },
 
+      notify(type, message) {
+        this.$notify({
+          type: type,
+          message: message
+        });
+      },
+
     // Handle form submission
     async handleSubmit() {
       if (this.validateForm()) {
