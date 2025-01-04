@@ -1,101 +1,78 @@
 <template>
-  <div class="container mt-5">
-    <div class="row justify-content-center">
-      <div class="col-md-12">
-        <div class="card shadow-sm">
-          <div class="card-header d-flex justify-content-between align-items-center bg-primary text-white">
-            <h3><i class="fas fa-warehouse"></i> Products</h3>
-            <input
-                type="text"
-                v-model="searchQuery"
-                class="form-control w-25"
-                placeholder="Search by product name"
-                @input="filterProducts"
-            />
-          </div>
-          <div class="card-body">
-            <!-- Export Buttons -->
-            <div class="d-flex justify-content-end mb-4">
-              <button class="btn btn-success me-2" @click="exportToExcel"><i class="fas fa-file-excel"></i> Export to Excel</button>
-              <button class="btn btn-danger me-2" @click="exportToPDF"><i class="fas fa-file-pdf"></i> Export to PDF</button>
-              <button class="btn btn-secondary" @click="printPage"><i class="fas fa-print"></i> Print</button>
-            </div>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="card shadow-sm">
+                    <div class="card-header d-flex justify-content-between align-items-center bg-primary text-white">
+                        <h3><i class="fas fa-warehouse"></i> Products</h3>
+                        <input
+                            type="text"
+                            v-model="searchQuery"
+                            class="form-control w-25"
+                            placeholder="Search by product name"
+                            @input="filterProducts"
+                        />
+                    </div>
+                    <div class="card-body">
+                        <!-- Loader -->
+                        <div v-if="loading" class="d-flex justify-content-center align-items-center" style="height: 300px;">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
 
-              <table class="table table-striped table-bordered">
-                  <thead>
-                  <tr>
-                      <th>#</th>
-                      <th>Product</th>
-                      <th>Description</th>
-                      <th>Units</th>
-                      <th>Quantity</th>
-                      <th>Price</th>
-                      <th>Expire Date</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr v-for="product in filteredProducts" :key="product.id">
-                      <td>{{ product.id }}</td>
-                      <td>{{ product.name }}</td>
-                      <td>{{ product.description }}</td>
-                      <td>
-                          <ul class="list-unstyled">
-                              <li v-for="unit in product.filteredUnits" :key="unit.name">{{ unit.name }}</li>
-                          </ul>
-                      </td>
-                      <td>
-                          <ul class="list-unstyled">
-                              <li v-for="unit in product.filteredUnits" :key="unit.name">{{ unit.pivot.quantity }}</li>
-                          </ul>
-                      </td>
-                      <td>
-                          <ul class="list-unstyled">
-                              <li v-for="unit in product.filteredUnits" :key="unit.name">{{ unit.pivot.price }}</li>
-                          </ul>
-                      </td>
-                      <td>
-                          <ul class="list-unstyled">
-                              <li v-for="unit in product.filteredUnits" :key="unit.name">{{ unit.pivot.expiry_date }}</li>
-                          </ul>
-                      </td>
-                  </tr>
-                  </tbody>
-              </table>
-          </div>
+                        <!-- Export Buttons -->
+                        <div v-else class="d-flex justify-content-end mb-4">
+                            <button class="btn btn-success me-2" @click="exportToExcel"><i class="fas fa-file-excel"></i> Export to Excel</button>
+                            <button class="btn btn-danger me-2" @click="exportToPDF"><i class="fas fa-file-pdf"></i> Export to PDF</button>
+                            <button class="btn btn-secondary" @click="printPage"><i class="fas fa-print"></i> Print</button>
+                        </div>
+
+                        <table v-if="!loading" class="table table-striped table-bordered">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Product</th>
+                                <th>Description</th>
+                                <th>Units</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Expire Date</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-for="product in filteredProducts" :key="product.id">
+                                <td>{{ product.id }}</td>
+                                <td>{{ product.name }}</td>
+                                <td>{{ product.description }}</td>
+                                <td>
+                                    <ul class="list-unstyled">
+                                        <li v-for="unit in product.filteredUnits" :key="unit.name">{{ unit.name }}</li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul class="list-unstyled">
+                                        <li v-for="unit in product.filteredUnits" :key="unit.name">{{ unit.pivot.quantity }}</li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul class="list-unstyled">
+                                        <li v-for="unit in product.filteredUnits" :key="unit.name">{{ unit.pivot.price }}</li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul class="list-unstyled">
+                                        <li v-for="unit in product.filteredUnits" :key="unit.name">{{ unit.pivot.expiry_date }}</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-      <!-- Add Quantity Modal -->
-    <div class="modal fade" id="addQuantityModal" tabindex="-1" aria-labelledby="addQuantityModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header bg-light">
-            <h5 class="modal-title" id="addQuantityModalLabel">Add Quantity</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form @submit.prevent="updateQuantity">
-              <div class="form-group mb-3">
-                <label for="newQuantity"><i class="fas fa-sort-numeric-up-alt"></i> New Quantity</label>
-                <input
-                    type="number"
-                    id="newQuantity"
-                    v-model="newQuantity"
-                    class="form-control"
-                    :class="{ 'is-invalid': errors.newQuantity }"
-                    required
-                />
-                <div class="invalid-feedback">{{ errors.newQuantity }}</div>
-              </div>
-              <button type="submit" class="btn btn-primary">
-                <i class="fas fa-save"></i> Save Changes
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </template>
 
 <script>
@@ -113,7 +90,8 @@ export default {
             searchQuery: '',
             selectedStock: null,
             newQuantity: '',
-            errors: {}
+            errors: {},
+            loading: true // Track the loading state
         };
     },
     mounted() {
@@ -134,6 +112,8 @@ export default {
                 this.filteredProducts = response.data;
             } catch (error) {
                 console.error('Error fetching products:', error);
+            } finally {
+                this.loading = false; // Set loading to false once the data is fetched
             }
         },
         filterProducts() {
@@ -253,55 +233,55 @@ export default {
 
 <style scoped>
 .container {
-  width: 100%;
+    width: 100%;
 }
 
 .card-header {
-  background-color: #f7f7f7;
-  border-bottom: 1px solid #e3e3e3;
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #e3e3e3;
 }
 
 .card-header h3 {
-  margin: 0;
+    margin: 0;
 }
 
 .table-hover tbody tr:hover {
-  background-color: #e9ecef;
+    background-color: #e9ecef;
 }
 
 .invalid-feedback {
-  display: block;
+    display: block;
 }
 
 .modal-header {
-  background-color: #f8f9fa;
+    background-color: #f8f9fa;
 }
 
 .modal-title {
-  font-size: 1.25rem;
+    font-size: 1.25rem;
 }
 
 .modal-body {
-  padding: 1.5rem;
+    padding: 1.5rem;
 }
 
 .btn-primary {
-  background-color: #007bff;
-  border-color: #007bff;
+    background-color: #007bff;
+    border-color: #007bff;
 }
 
 .btn-primary:hover {
-  background-color: #0056b3;
-  border-color: #0056b3;
+    background-color: #0056b3;
+    border-color: #0056b3;
 }
 
 .btn-close {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
 }
 
 .btn-close:hover {
-  color: #000;
+    color: #000;
 }
 </style>
