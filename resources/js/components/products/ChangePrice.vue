@@ -9,7 +9,7 @@
                 <select v-model="selectedProduct" id="product" class="form-control" @change="fetchUnitsAndExpiryDate">
                     <option value="" disabled>Select a product</option>
                     <option v-for="product in products" :key="product.id" :value="product.id">
-                        {{ product.name }}
+                        {{product.code}} - {{ product.name }} || {{product.description}}
                     </option>
                 </select>
                 <span v-if="errors.product" class="error">{{ errors.product }}</span>
@@ -63,7 +63,7 @@
 
         <!-- Bootstrap Toast Notification -->
         <div v-if="message" class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 9999">
-            <div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast fade show text-bg-success" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header">
                     <strong class="me-auto" :class="message.type === 'success' ? 'text-success' : 'text-danger'">
                         {{ message.type === 'success' ? 'Success' : 'Error' }}

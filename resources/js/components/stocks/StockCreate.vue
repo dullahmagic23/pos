@@ -8,7 +8,9 @@
         </label>
         <select id="product" v-model="stock.product_id" @change="fetchProductUnits" class="form-select">
           <option value="">Select a product</option>
-          <option v-for="product in products" :key="product.id" :value="product.id">{{ product.name }}</option>
+          <option v-for="product in products" :key="product.id" :value="product.id">
+              {{product.code}} - {{ product.name }} || {{product.description}}
+          </option>
         </select>
         <span v-if="errors.product_id" class="text-danger">{{ errors.product_id }}</span>
       </div>
@@ -96,7 +98,7 @@ export default {
     async handleSubmit() {
       if (this.validateForm()) {
         try {
-          const response = await axios.post('/api/stocks', this.stock);
+          await axios.post('/api/stocks', this.stock);
           this.$notify("Product added to stock successfully.");
           // Reset the form or show a success message
           this.stock = {
