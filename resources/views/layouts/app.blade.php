@@ -89,28 +89,6 @@
                                                 <i class="fa-solid fa-cart-shopping"></i>
                                             </div>
                                             SALES</a>
-                                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError4" aria-expanded="false" aria-controls="pagesCollapseError">
-                                            <div class="sb-nav-link-icon">
-                                                <i class="fas fa-check-circle"></i></div>
-                                            PAYMENTS
-                                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                        </a>
-
-                                        <div class="collapse" id="pagesCollapseError4" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                            <nav class="sb-sidenav-menu-nested nav">
-                                                <a class="nav-link" href="{{route('payments.create')}}">
-                                                    <div class="sb-nav-link-icon">
-                                                        <i class="fa-solid fa-cash-register"></i>
-                                                    </div>
-                                                    New Payment
-                                                </a>
-                                                <a class="nav-link" href="{{route('payments.index')}}">
-                                                    <div class="sb-nav-link-icon">
-                                                        <i class="fas fa-check-double"></i></div>
-                                                    All Payments
-                                                </a>
-                                            </nav>
-                                        </div>
                                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError5" aria-expanded="false" aria-controls="pagesCollapseError">
                                             <div class="sb-nav-link-icon">
                                                 <i class="fas fa-check-circle"></i></div>
@@ -139,6 +117,28 @@
                                                 <i class="fa-solid fa-cart-shopping"></i>
                                             </div>
                                             SALES REPORT</a>
+                                    </nav>
+                                </div>
+                                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError4" aria-expanded="false" aria-controls="pagesCollapseError">
+                                    <div class="sb-nav-link-icon">
+                                        <i class="fas fa-check-circle"></i></div>
+                                    PAYMENTS
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+
+                                <div class="collapse" id="pagesCollapseError4" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                    <nav class="sb-sidenav-menu-nested nav">
+                                        <a class="nav-link" href="{{route('payments.create')}}">
+                                            <div class="sb-nav-link-icon">
+                                                <i class="fa-solid fa-cash-register"></i>
+                                            </div>
+                                            New Payment
+                                        </a>
+                                        <a class="nav-link" href="{{route('payments.index')}}">
+                                            <div class="sb-nav-link-icon">
+                                                <i class="fas fa-check-double"></i></div>
+                                            All Payments
+                                        </a>
                                     </nav>
                                 </div>
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts1" aria-expanded="false" aria-controls="collapseLayouts">
@@ -381,11 +381,16 @@
                                 </div>
                                 <a class="nav-link" href="#">
                                     <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                    Charts
+                                    AI Features
                                 </a>
-                                <a class="nav-link" href="#">
-                                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                    Tables
+                                <a class="nav-link" href="#"  onclick="event.preventDefault();
+                                                     document.getElementById('logout').submit();">
+                                    <div class="sb-nav-link-icon">
+                                        <i class="fa fa-power-off"></i></div>
+                                    <form action="{{route('logout')}}" method="post" id="logout">
+                                        @csrf
+                                    </form>
+                                    Sign out
                                 </a>
                             </div>
                         </div>
@@ -403,7 +408,7 @@
                         @yield("content")
                         <notifications position="bottom right"/>
                     </main>
-                    {{-- <footer class="py-4 bg-light mt-auto">
+                     <footer class="py-4 bg-light mt-auto">
                         <div class="container-fluid px-4">
                             <div class="d-flex align-items-center justify-content-between small">
                                 <div class="text-muted">Copyright &copy; Your Website 2023</div>
@@ -414,7 +419,7 @@
                                 </div>
                             </div>
                         </div>
-                    </footer> --}}
+                    </footer>
                 </div>
             </div>
         </div>
@@ -425,9 +430,5 @@
             margin:0;
         }
     </style>
-    <script src="{{asset('js/scripts.js')}}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-    <script src="{{asset('js/datatables-simple-demo.js')}}"></script>
 </body>
 </html>

@@ -58,9 +58,16 @@
         </div>
 
         <!-- Total Price -->
-        <div class="form-group">
-            <label for="total">Total</label>
-            <input type="text" id="total" class="form-control" v-model="total" readonly />
+        <div class="row form-group">
+            <div class="col-md-6">
+                <label for="total">Total</label>
+                <input type="text" id="total" class="form-control" v-model="total" readonly />
+            </div>
+            <div class="col-md-6">
+                <label for="date">Date</label>
+                <input type="date" id="date" class="form-control" v-model="date" />
+            </div>
+
         </div>
 
         <!-- Add to Order -->
@@ -136,6 +143,7 @@ export default {
             price: 0,
             quantity: 1,
             total: 0,
+            date:null,
             orderItems: [],
             errors: {},
             currentQuantity: 0,
@@ -156,6 +164,7 @@ export default {
                 !this.selectedProduct ||
                 !this.selectedUnit ||
                 !this.quantity ||
+                !this.date ||
                 this.quantity <= 0
             );
         },
@@ -280,6 +289,7 @@ export default {
 
             const orderData = {
                 customer_id: this.selectedCustomer,
+                date: this.date,
                 items: this.orderItems.map((item) => ({
                     product_id: item.product.id,
                     unit_id: item.unit.id,

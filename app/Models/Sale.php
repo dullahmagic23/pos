@@ -12,9 +12,7 @@ class Sale extends Model
         'product_id',
         'customer_id',
         'unit_id',
-        'quantity',
-        'price',
-        'total',
+        'date',
         'user_id'
     ];
 

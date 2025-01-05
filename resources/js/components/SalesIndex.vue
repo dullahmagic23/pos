@@ -118,9 +118,10 @@ export default {
         formatCurrency(value) {
             return new Intl.NumberFormat('sw-TZ', { style: 'currency', currency: 'TZS' }).format(value);
         },
+
         formatDate(dateString) {
-            const date = new Date(dateString);
-            return `${date.getDate().toString().padStart(2, '0')}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getFullYear()}`;
+            const options = {year: 'numeric', month: 'numeric', day: 'numeric'};
+            return new Date(dateString).toLocaleDateString('sw-TZ', options);
         },
         async handleCancel(saleId) {
             const sale = this.sales.find(s => s.id === saleId);
@@ -143,11 +144,10 @@ export default {
     computed: {
         filteredSales() {
             return this.sales.filter((sale) => {
-                const saleDate = new Date(sale.created_at);
+                const saleDate = new Date(sale.date);
                 const matchesCustomer = sale.customer && sale.customer.name.toLowerCase().includes(this.searchQuery.toLowerCase());
-                const matchesStartDate = !this.startDate || saleDate >= new Date(this.startDate);
-                const matchesEndDate = !this.endDate || saleDate <= new Date(this.endDate);
-                return matchesCustomer && matchesStartDate && matchesEndDate;
+                const matchesDate = (!this.startDate || saleDate >= new Date(this.startDate)) && (!this.endDate || saleDate <= new Date(this.endDate));
+                return matchesCustomer && matchesDate
             });
         },
         totalSalesAmount() {

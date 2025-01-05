@@ -10,7 +10,7 @@ class ApiPaymentMethodController extends Controller
 {
     public function index()
     {
-        return PaymentMethod::all();
+        return PaymentMethod::latest()->get();
     }
 
     public function getPaymentMethod($id)

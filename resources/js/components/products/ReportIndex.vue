@@ -207,11 +207,11 @@ export default {
   computed: {
     filteredSales() {
       return this.sales.filter(sale => {
-        const saleDate = new Date(sale.created_at);
+        const saleDate = new Date(sale.date);
         const matchesCustomer = !this.selectedCustomer || sale.customer.id === parseInt(this.selectedCustomer);
-        const matchesStartDate = !this.startDate || saleDate >= new Date(this.startDate);
-        const matchesEndDate = !this.endDate || saleDate <= new Date(this.endDate);
-        return matchesCustomer && matchesStartDate
+          const matchesStartDate = !this.startDate || saleDate >= new Date(this.startDate);
+          const matchesEndDate = !this.endDate || saleDate <= new Date(this.endDate);
+          return matchesCustomer && matchesStartDate && matchesEndDate;
       });
     },
     totalSales() {

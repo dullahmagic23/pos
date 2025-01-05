@@ -228,7 +228,6 @@ export default {
     },
     getSaleTotal(saleId) {
       const sale = this.payments.find(payment => payment.sale_id === saleId);
-      console.log(this.getTotal(sale))
       return this.getTotal(saleId) // Assuming each sale has a unique sale_id and the 'amount' field represents the total
     },
 

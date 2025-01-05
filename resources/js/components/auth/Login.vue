@@ -41,7 +41,7 @@
                 </div>
                 <div class="card-footer text-center py-3">
                   <div class="small">
-                    <p>&copy; RoyalTech Services {{ new Date().getFullYear() }}</p>
+                    <p>&copy; {{ new Date().getFullYear() }} RoyalTech Services </p>
                   </div>
                 </div>
               </div>

@@ -35,7 +35,8 @@ class ApiPosController extends Controller
         $sale = Sale::create([
             'uuid' => $uuid,
             'customer_id' => $request->customer_id,
-            'user_id' => auth()->user()->id
+            'user_id' => auth()->user()->id,
+            'date' => $request->date
         ]);
         foreach ($request->items as $item) {
            DB::table('product_sale')->insert([
@@ -58,7 +59,7 @@ class ApiPosController extends Controller
 
     public function sell()
     {
-        
+
     }
 }
 
