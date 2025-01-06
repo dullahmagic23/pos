@@ -1,11 +1,22 @@
 <?php
 
+use App\Http\Controllers\api\ApiCompanyController;
+use App\Http\Controllers\api\ApiProductKeyController;
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\ProductKeyController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', "App\Http\Controllers\HomeController@index")->name('home');
-
 Auth::routes();
+Route::middleware(['checkCompany','checkProductKey'])->group(function () {
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+    // Add other routes that need to check for company registration
+});
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::group(['prefix' => 'users','middleware' => ['auth','admin']], function () {
@@ -171,3 +182,11 @@ Route::group(['prefix'=>'discounts','middleware'=>['auth','admin']],function(){
     Route::get('/create','App\Http\Controllers\DiscountController@create')->name('discounts.create');
     Route::get('/edit/{id}','App\Http\Controllers\DiscountController@edit')->name('discounts.edit');
 });
+
+Route::group(['prefix' => 'companies'], function (){
+    Route::get('/', [CompanyController::class, 'index'])->name('companies.index');
+    Route::get('/create', [CompanyController::class, 'create'])->name('companies.create');
+});
+Route::get('/enter-product-keys', [ProductKeyController::class,'index'])->name('enterProductKey');
+Route::post('/api/companies',[ApiCompanyController::class,'store'])->name('api.company.store');
+Route::post('/api/product-keys',[ApiProductKeyController::class,'update'])->name('api.product-keys.update');
