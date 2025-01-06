@@ -24,7 +24,7 @@ class ApiProductKeyController extends Controller
         foreach ($keys as $key){
             if ($validated['key'] === Crypt::decryptString($key->key)){
                 $key->update(['is_active' => 1]);
-                return response()->json(['message' => 'Valid Product key entered','status' => 200],);
+                return response()->json(['message' => 'Valid Product key entered','status' => 200]);
             }
         }
 
