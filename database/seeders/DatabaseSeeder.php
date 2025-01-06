@@ -15,14 +15,15 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-//            PaymentMethodSeeder::class,
-//         ExpenseCategorySeeder::class,
-//        DiscountTypeSeeder::class,
-//        DiscountSeeder::class,
-        ProductKeySeeder::class
+            PaymentMethodSeeder::class,
+         ExpenseCategorySeeder::class,
+        DiscountTypeSeeder::class,
+        DiscountSeeder::class,
+        ProductKeySeeder::class,
+        RoleSeeder::class
         ]);
 //         User::factory(10)->create();
-//       $this->call(UnitsSeeder::class);
+       $this->call(UnitsSeeder::class);
 //
 //        $user = User::factory()->create([
 //            'name' => 'Abdilah Ramadhani',

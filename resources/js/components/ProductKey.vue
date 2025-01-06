@@ -68,6 +68,12 @@ export default {
                 this.isValid = true;
             }
         },
+
+        postSuccessfulSubmit(){
+            setTimeout(function (){
+                window.location.href = '/login'
+            },2000)
+        },
         async submitForm() {
             if (!this.isValid) {
                 alert("Please enter a valid product key.");
@@ -81,15 +87,14 @@ export default {
                 if (response.data.status === 200) {
                     this.successMessage = response.data.message;
                     this.productKey = ""; // Clear the input
-                    this.isValid = false; // Reset form state
-                    alert(this.successMessage)
-                    window.location.href = '/login'
+                    this.isValid = false;
+                    this.postSuccessfulSubmit()
                 } else {
                     this.validationMessage = response.data.message;
                     this.isValid = false; // Reset form state
                 }
             } catch (error) {
-                alert(error.response.data.message);
+                this.validationMessage = error.response.data.message;
                 console.error(error);
             } finally {
                 this.loading = false;

@@ -9,6 +9,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ApiCompanyController extends Controller
 {
+    public function index()
+    {
+        return Company::first();
+    }
     public function store(Request $request)
     {
         $request->validate([

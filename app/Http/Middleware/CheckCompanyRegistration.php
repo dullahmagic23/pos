@@ -28,6 +28,6 @@ class CheckCompanyRegistration
             return redirect()->route('companies.create');
         }
 
-        return $next($request);
+        return  $next($request);
     }
 }

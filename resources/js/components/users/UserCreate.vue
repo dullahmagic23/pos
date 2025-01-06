@@ -134,7 +134,7 @@ export default {
           .then(response => {
             // Handle successful response
             this.$notify("User created successfully!")
-
+            window.location.href = '/users'
             // Reset the form fields after successful creation
             this.form = {
               name: '',

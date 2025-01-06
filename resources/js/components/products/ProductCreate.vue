@@ -62,38 +62,6 @@
         </form>
       </div>
     </div>
-
-    <!-- Search Input -->
-    <div class="search-container mt-4">
-      <input
-          type="text"
-          v-model="searchQuery"
-          @input="handleSearch"
-          class="form-control"
-          placeholder="Search products..."
-      />
-    </div>
-
-    <!-- Pagination Controls -->
-    <div class="pagination-container mt-4">
-      <button class="btn btn-secondary" :disabled="currentPage === 1" @click="goToPage(currentPage - 1)">
-        <i class="fas fa-arrow-left"></i> Previous
-      </button>
-      <span class="mx-3">Page {{ currentPage }} of {{ totalPages }}</span>
-      <button class="btn btn-secondary" :disabled="currentPage === totalPages" @click="goToPage(currentPage + 1)">
-        Next <i class="fas fa-arrow-right"></i>
-      </button>
-    </div>
-
-    <!-- Display Products -->
-    <div class="mt-4">
-      <h3>Products</h3>
-      <ul class="list-group">
-        <li v-for="product in products" :key="product.id" class="list-group-item">
-          {{ product.name }} - {{ product.code }}
-        </li>
-      </ul>
-    </div>
   </div>
 </template>
 

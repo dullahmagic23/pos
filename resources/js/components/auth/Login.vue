@@ -13,7 +13,7 @@
                   <form @submit.prevent="handleLogin">
                     <div class="form-floating mb-3">
                       <input v-model="email" class="form-control" id="inputEmail" type="email" placeholder="name@example.com" />
-                      <label for="inputEmail">
+                      <label for="inputEmail" class="col-form-label bg-transparent">
                         <i class="fas fa-envelope"></i> Email address
                       </label>
                       <div v-if="errors.email" class="text-danger">{{ errors.email }}</div>
@@ -114,6 +114,8 @@ export default {
 </script>
 
 <style>
-
+label{
+    background-color: transparent;
+}
 /* Add any custom styles here */
 </style>

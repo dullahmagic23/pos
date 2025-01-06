@@ -234,9 +234,7 @@ export default {
         },
         updateTotal() {
             this.total = this.price * this.quantity;
-            if (this.quantity > this.currentQuantity) {
-                this.errors.quantity = `Available: ${this.currentQuantity}. Adjust your quantity.`;
-            }
+            this.checkProductQuantity();
         },
         addItemToOrder() {
             if (

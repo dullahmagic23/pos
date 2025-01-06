@@ -70,7 +70,7 @@
                     </td>
                 </tr>
                 <tr class="table-light">
-                    <td colspan="6"><strong>Total Sales Amount</strong></td>
+                    <td colspan="5"><strong>Total Sales Amount</strong></td>
                     <td colspan="3"><strong>{{ formatCurrency(totalSalesAmount) }}</strong></td>
                 </tr>
                 </tbody>

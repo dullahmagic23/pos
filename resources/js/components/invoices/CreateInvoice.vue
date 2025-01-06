@@ -19,7 +19,7 @@
         >
           <option value="" disabled>Select a sale...</option>
           <option v-for="sale in sales" :key="sale.id" :value="sale.id">
-            Sale ID: {{ sale.id }} - {{ formatDate(sale.created_at) }}
+            Sale ID: {{ formatSaleId(sale.id) }} - {{ formatDate(sale.created_at) }}
           </option>
         </select>
       </div>
@@ -219,6 +219,9 @@ export default {
       new Toast(toast).show();
       setTimeout(() => toast.remove(), 5000);
     },
+      formatSaleId(id) {
+          return id.toString().padStart(5, '0');
+      },
   },
 };
 </script>

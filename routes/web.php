@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Auth::routes();
-Route::middleware(['checkCompany','checkProductKey'])->group(function () {
+Route::middleware(['checkCompany','checkProductKey','checkUser'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -20,16 +20,17 @@ Route::middleware(['checkCompany','checkProductKey'])->group(function () {
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::group(['prefix' => 'users','middleware' => ['auth','admin']], function () {
-    Route::get('/', "App\Http\Controllers\UserController@index")->name('users.index');
-    Route::post('/', "App\Http\Controllers\UserController@store")->name('users.store');
-    Route::get("/create", "App\Http\Controllers\UserController@create")->name('users.create');
     Route::get('/edit/{id}', "App\Http\Controllers\UserController@edit")->name('users.edit');
+    Route::get('/', "App\Http\Controllers\UserController@index")->name('users.index');
     Route::post('/update/{id}', "App\Http\Controllers\UserController@update")->name('users.update');
     Route::get('/delete/{id}', "App\Http\Controllers\UserController@delete")->name('users.delete');
     Route::get('/show/{id}', "App\Http\Controllers\UserController@show")->name('users.show');
     Route::get('/search', "App\Http\Controllers\UserController@search")->name('users.search');
 
 });
+
+Route::get("users/create", "App\Http\Controllers\UserController@create")->name('users.create')->middleware(['checkCompany','checkProductKey']);
+Route::post('/users', "App\Http\Controllers\UserController@store")->name('users.store');
 
 Route::group(['prefix' => 'roles','middleware' => ['auth','admin']], function () {
     Route::get('/', "App\Http\Controllers\RoleController@index")->name('roles.index');
@@ -189,4 +190,5 @@ Route::group(['prefix' => 'companies'], function (){
 });
 Route::get('/enter-product-keys', [ProductKeyController::class,'index'])->name('enterProductKey');
 Route::post('/api/companies',[ApiCompanyController::class,'store'])->name('api.company.store');
+Route::get('/api/companies',[ApiCompanyController::class,'index'])->name('api.company.index');
 Route::post('/api/product-keys',[ApiProductKeyController::class,'update'])->name('api.product-keys.update');
